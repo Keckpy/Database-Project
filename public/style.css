@@ -80,7 +80,7 @@ form button {
 }
 .cuForm {
     display: grid;
-    grid-template-columns: 180px 250px 25px;
+    grid-template-columns: 180px 250px 180px;
     gap: 12px 8px;
     width: fit-content;
 }
