@@ -1,0 +1,40 @@
+
+
+{{! READ table }}
+<table>
+    <thead>
+        
+        <tr>
+            {{#each doctors.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            {{!-- <th></th> Use this column for DELETE --}}
+        </tr>
+    </thead>
+
+    <tbody>
+        
+        {{#each doctors}}
+        <tr>
+            <td>{{this.doctorID}}</td>
+            <td>{{this.firstName}}</td>
+            <td>{{this.lastName}}</td>
+            <td>{{this.specialty}}</td>
+            
+
+            {{!-- {{! DELETE form }}
+            <form id='delete_patient_form'>
+                <input type='hidden' name='delete_patient_id' value='{{this.patientID}}' />
+                <input type='hidden' name='delete_patient_name' value='{{this.firstName}} {{this.lastName}}' />
+                <td>
+                    <button type='submit'>
+                        Delete
+                    </button>
+                </td>
+            </form> --}}
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

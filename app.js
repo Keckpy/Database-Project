@@ -1,0 +1,142 @@
+// Citation for starter code:
+// Date: 07/25/2026
+// Copied from:
+// Source URL: https://canvas.oregonstate.edu/courses/2051721/pages/exploration-web-application-technology-2?module_item_id=26923351
+
+// ########################################
+// ########## SETUP
+
+// Express
+const express = require('express');
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
+
+const PORT = 57355;
+
+// Database
+const db = require('./database/db-connector');
+
+// Handlebars
+const { engine } = require('express-handlebars'); // Import express-handlebars engine
+app.engine('.hbs', engine({ extname: '.hbs' })); // Create instance of handlebars
+app.set('view engine', '.hbs'); // Use handlebars engine for *.hbs files.
+
+// ########################################
+// ########## ROUTE HANDLERS
+
+// READ ROUTES
+app.get('/', async function (req, res) {
+    try {
+        res.render('home'); // Render the home.hbs file
+    } catch (error) {
+        console.error('Error rendering page:', error);
+        // Send a generic error message to the browser
+        res.status(500).send('An error occurred while rendering the page.');
+    }
+});
+
+app.get('/patients', async function (req, res) {
+    try {
+        const query1 = `SELECT patientID, firstName, lastName, 
+        DATE_FORMAT(dateOfBirth, '%m-%d-%Y') as dateOfBirth FROM Patients`;
+
+        const [patients] = await db.query(query1);
+
+        res.render('patients', { patients: patients, pageTitle: 'Patients', showNav: true });
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+app.get('/doctors', async function (req, res) {
+    try {
+        const query1 = `SELECT * FROM Doctors`;
+
+        const [doctors] = await db.query(query1);
+
+        res.render('doctors', { doctors: doctors, pageTitle: 'Doctors', showNav: true });
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+app.get('/specimens', async function (req, res) {
+    try {
+        const query1 = `SELECT * FROM Specimens`;
+
+        const [specimens] = await db.query(query1);
+
+        res.render('specimens', { specimens: specimens, pageTitle: 'Specimens', showNav: true });
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+app.get('/laboratoryTests', async function (req, res) {
+    try {
+        const query1 = `SELECT * FROM LaboratoryTests`;
+
+        const [laboratoryTests] = await db.query(query1);
+
+        res.render('laboratoryTests', { laboratoryTests: laboratoryTests, pageTitle: 'LaboratoryTests', showNav: true });
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+app.get('/specimenTests', async function (req, res) {
+    try {
+        const query1 = `SELECT * FROM SpecimenTests`;
+        const query2 = `SELECT * FROM Specimens`;
+        const query3 = `SELECT * FROM LaboratoryTests`;
+        const query4 = `SELECT * FROM Doctors`;
+        const [specimenTests] = await db.query(query1);
+        const [specimens] = await db.query(query2);
+        const [laboratoryTests] = await db.query(query3);
+        const [doctors] = await db.query(query4);
+
+        res.render('specimenTests', { 
+            specimenTests: specimenTests,
+            specimens: specimens,
+            laboratoryTests: laboratoryTests,
+            doctors: doctors,
+            pageTitle: 'SpecimenTests', 
+            showNav: true 
+        });
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+// ########################################
+// ########## LISTENER
+
+app.listen(PORT, function () {
+    console.log(
+        'Express started on http://localhost:' +
+            PORT +
+            '; press Ctrl-C to terminate.'
+    );
+});

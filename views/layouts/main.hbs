@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>CS340 - My Project</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    {{#if pageTitle}}
+    <h1>{{pageTitle}}</h1>
+    {{/if}}
+
+    {{#if showNav}}
+    <nav class="site-nav">
+        <a href="/">Home</a>
+        <a href="/patients">Patients</a>
+        <a href="/doctors">Doctors</a>
+        <a href="/specimens">Specimens</a>
+        <a href="/laboratoryTests">LaboratoryTests</a>
+        <a href="/specimenTests">SpecimenTests</a>
+    </nav>
+    {{/if}}
+
+    <main class="page-content">
+       {{{body}}} 
+    </main>
+    
+
+</body>
+</html>

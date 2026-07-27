@@ -1,0 +1,88 @@
+
+
+{{! READ table }}
+<table>
+    <thead>
+        
+        <tr>
+            {{#each patients.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            {{!-- <th></th> Use this column for DELETE --}}
+        </tr>
+    </thead>
+
+    <tbody>
+        
+        {{#each patients}}
+        <tr>
+            <td>{{this.patientID}}</td>
+            <td>{{this.firstName}}</td>
+            <td>{{this.lastName}}</td>
+            <td>{{this.dateOfBirth}}</td>
+            
+
+            {{!-- {{! DELETE form }}
+            <form id='delete_patient_form'>
+                <input type='hidden' name='delete_patient_id' value='{{this.patientID}}' />
+                <input type='hidden' name='delete_patient_name' value='{{this.firstName}} {{this.lastName}}' />
+                <td>
+                    <button type='submit'>
+                        Delete
+                    </button>
+                </td>
+            </form> --}}
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{!-- {{! CREATE form }}
+<h2>Create a Patient</h2>
+<form class='cuForm' id='create_patient_form'>
+    <label for='create_patient_firstName'>First Name: </label>
+    <input type='text' name='create_patient_firstName' id='create_patient_firstName' required />
+
+    <label for='create_patient_lastName'>Last Name: </label>
+    <input type='text' name='create_patient_lastName' id='create_patient_lastName' required />
+
+    <label for='create_patient_dob'>Age:</label>
+    <input type='date' name='create_patient_dob' id='create_patient_dob' required />
+
+    <input type='submit' />
+</form>
+
+{{! UPDATE form }}
+<h2>Update a Person</h2>
+<form class='cuForm' id='update_person_form'>
+    <label for='update_person_id'>Person to Update: </label>
+    <select name='update_person_id' id='update_person_id' required>
+        <option value='' disabled selected>Select a Person</option>
+        {{#each people}}
+        <option value='{{this.id}}' required>
+            {{this.id}}
+            -
+            {{this.fname}}
+            {{this.lname}}
+        </option>
+        {{/each}}
+    </select>
+
+    <label for='update_person_homeworld'>Homeworld: </label>
+    <select name='update_person_homeworld' id='update_person_homeworld'>
+        <option value='NULL' disabled selected>Select a Planet</option>
+        <option value='NULL'>&lt; None &gt;</option>
+        {{#each homeworlds}}
+        <option value='{{this.id}}' required>
+            {{this.name}}
+        </option>
+        {{/each}}
+    </select>
+
+    <label for='update_person_age'>Age: </label>
+    <input type='number' name='update_person_age' id='update_person_age' min='0' />
+
+    <input type='submit' />
+</form> --}}

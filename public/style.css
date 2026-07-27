@@ -1,0 +1,120 @@
+/* Reset & Base */
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #f4f6f8;
+    color: #333;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    margin-block: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.site-nav {
+    display: flex;
+    justify-content: center;
+    margin-block: 25px 40px;
+}
+
+.site-nav a:not(:last-child) {
+    border-right: 1px solid #333
+}
+
+.site-nav a {
+    text-decoration: none;
+    padding-inline: 12px;
+}
+
+.site-nav a:hover {
+    color: #333;
+}
+
+.page-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+.home-nav {
+    width: fit-content;
+    margin: 50px auto;
+    transform: translateX(50px);
+    font-size: 18px;
+}
+
+.home-nav div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-block-end: 10px;
+}
+
+.home-nav p {
+    margin: 0;
+}
+
+.home-nav a {
+    text-decoration: none;
+    text-align: right;
+}
+
+.home-nav a:hover {
+    color: #333;
+}
+
+form button {
+    padding: 3px;
+    cursor: pointer;
+}
+.cuForm {
+    display: grid;
+    grid-template-columns: 180px 250px 25px;
+    gap: 12px 8px;
+    width: fit-content;
+}
+
+.cuForm div {
+    display: contents;
+}
+
+.cuForm label {
+    grid-column: 1;
+    text-align: right;
+}
+
+.cuForm select {
+    grid-column: 2;
+    width: 250px;
+    padding: 3px;
+    cursor: pointer;
+}
+
+.cuForm button {
+    grid-column: 2;
+    justify-self: end;
+    padding: 5px;
+    cursor: pointer;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+th {background-color: #f2f2f2;}
+tr:nth-child(even) {background-color: #f9f9f9;}
+input, select { margin-bottom: 4px;margin-right: 12px;}
+
+

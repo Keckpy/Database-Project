@@ -1,0 +1,197 @@
+
+
+{{! READ table }}
+<table>
+    <thead>
+        
+        <tr>
+            {{#each specimenTests.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        
+        {{#each specimenTests}}
+        <tr>
+            <td>{{this.specimenTestID}}</td>
+            <td>{{this.specimenID}}</td>
+            <td>{{this.laboratoryTestID}}</td>
+            <td>{{this.doctorID}}</td>
+            <td>{{this.testStatus}}</td>
+            
+            <td>
+                {{! DELETE form }}
+                <form id='delete_specimenTest_form'>
+                    <input type='hidden' name='delete_specimenTest_id' value='{{this.specimenTestID}}' />
+                    <button type='submit'>Delete</button>
+                </form>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{! CREATE form }}
+<h2>Add a SpecimenTest</h2>
+{{!-- <p>Specimen: [dropdown] Laboratory Test: [dropdown] Doctor: [dropdown] Status: [dropdown]</p> --}}
+<form class="cuForm" id="add_specimenTest">
+    <div>
+    <label for="update_specimen">Specimen: </label>
+    <select name="update_specimen" id="update_specimen" required>
+        <option value="" disabled selected>Select a Specimen</option>
+        {{#each specimens}}
+            <option value="{{this.specimenID}}" required>
+                {{this.specimenID}} - {{this.specimenType}} - {{this.status}}
+            </option>
+        {{/each}}
+    </select>
+    </div>
+
+    <div>
+    <label for="update_laboratory_test">Laboratory Test: </label>
+    <select name="update_laboratory_test" id="update_laboratory_test" required>
+        <option value="" disabled selected>Select a Test</option>
+        {{#each laboratoryTests}}
+            <option value="{{this.laboratoryTestID}}" required>
+                {{this.laboratoryTestID}} - {{this.testName}} - {{this.department}}
+            </option>
+        {{/each}}
+    </select>
+    </div>
+
+    <div>
+    <label for="update_doctor">Doctor: </label>
+    <select name="update_doctor" id="update_doctor" required>
+        <option value="" disabled selected>Select a Doctor</option>
+        {{#each doctors}}
+            <option value="{{this.doctorID}}" required>
+                {{this.doctorID}} - {{this.firstName}} {{this.lastName}} - {{this.specialty}}
+            </option>
+        {{/each}}
+    </select>
+    </div>
+
+    <div>
+    <label for="update_status">Status: </label>
+    <select name="update_status" id="update_status" required>
+        <option value="" disabled selected>Select a Status</option>
+        <option value="Collected">Collected</option>
+        <option value="In-Lab">In-Lab</option>
+        <option value="Completed">Completed</option>
+    </select>
+    </div>
+    
+    <button type="submit">Add</button>
+</form>
+{{!-- <form class='cuForm' id='create_patient_form'>
+    <label for='create_patient_firstName'>First Name: </label>
+    <input type='text' name='create_patient_firstName' id='create_patient_firstName' required />
+
+    <label for='create_patient_lastName'>Last Name: </label>
+    <input type='text' name='create_patient_lastName' id='create_patient_lastName' required />
+
+    <label for='create_patient_dob'>DOB:</label>
+    <input type='date' name='create_patient_dob' id='create_patient_dob' required />
+
+    <input type='submit' />
+</form> --}}
+
+{{! UPDATE form }}
+<h2>Update a SpecimenTest</h2>
+{{!-- <p>Specimen: [dropdown] Laboratory Test: [dropdown] Doctor: [dropdown] Status: [dropdown]</p> --}}
+<form class="cuForm" id="update_specimenTest">
+    <div>
+        <label for="update_specimenTest">SpecimenTest to Update: </label>
+        <select name="update_specimenTest" id="update_specimenTest" required>
+            <option value="" disabled selected>Select a SpecimenTest</option>
+            {{#each specimenTests}}
+            <option value="{{this.specimenTestID}}" required>
+                {{this.specimenTestID}} - {{this.specimenID}} - {{this.laboratoryTestID}} - {{this.doctorID}} - {{this.testStatus}}
+            </option>
+            {{/each}}
+        </select>
+    </div>
+
+    <div>
+        <label for="update_specimen">Specimen: </label>
+        <select name="update_specimen" id="update_specimen" required>
+            <option value="" disabled selected>Select a Specimen</option>
+            {{#each specimens}}
+                <option value="{{this.specimenID}}" required>
+                    {{this.specimenID}} - {{this.specimenType}} - {{this.status}}
+                </option>
+            {{/each}}
+        </select>
+    </div>
+
+    <div>
+        <label for="update_laboratory_test">Laboratory Test: </label>
+        <select name="update_laboratory_test" id="update_laboratory_test" required>
+            <option value="" disabled selected>Select a Test</option>
+            {{#each laboratoryTests}}
+                <option value="{{this.laboratoryTestID}}" required>
+                    {{this.laboratoryTestID}} - {{this.testName}} - {{this.department}}
+                </option>
+            {{/each}}
+        </select>
+    </div>
+
+    <div>
+        <label for="update_doctor">Doctor: </label>
+        <select name="update_doctor" id="update_doctor" required>
+            <option value="" disabled selected>Select a Doctor</option>
+            {{#each doctors}}
+                <option value="{{this.doctorID}}" required>
+                    {{this.doctorID}} - {{this.firstName}} {{this.lastName}} - {{this.specialty}}
+                </option>
+            {{/each}}
+        </select>
+    </div>
+
+    <div>
+        <label for="update_status">Status: </label>
+        <select name="update_status" id="update_status" required>
+            <option value="" disabled selected>Select a Status</option>
+            <option value="Collected">Collected</option>
+            <option value="In-Lab">In-Lab</option>
+            <option value="Completed">Completed</option>
+        </select>
+    </div>
+
+    <button type="submit">Update</button>
+</form>
+{{!-- <form class='cuForm' id='update_person_form'>
+    <label for='update_person_id'>Person to Update: </label>
+    <select name='update_person_id' id='update_person_id' required>
+        <option value='' disabled selected>Select a Person</option>
+        {{#each people}}
+        <option value='{{this.id}}' required>
+            {{this.id}}
+            -
+            {{this.fname}}
+            {{this.lname}}
+        </option>
+        {{/each}}
+    </select>
+
+    <label for='update_person_homeworld'>Homeworld: </label>
+    <select name='update_person_homeworld' id='update_person_homeworld'>
+        <option value='NULL' disabled selected>Select a Planet</option>
+        <option value='NULL'>&lt; None &gt;</option>
+        {{#each homeworlds}}
+        <option value='{{this.id}}' required>
+            {{this.name}}
+        </option>
+        {{/each}}
+    </select>
+
+    <label for='update_person_age'>Age: </label>
+    <input type='number' name='update_person_age' id='update_person_age' min='0' />
+
+    <input type='submit' />
+</form> --}}
