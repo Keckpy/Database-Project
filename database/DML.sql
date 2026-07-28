@@ -35,7 +35,9 @@ INNER JOIN LaboratoryTests ON SpecimenTests.laboratoryTestID = LaboratoryTests.l
 INNER JOIN Doctors ON SpecimenTests.doctorID = Doctors.doctorID;
 
 -- Get all specimens to populate the specimen dropdown
-SELECT specimenID, specimenType FROM Specimens;
+SELECT Specimens.specimenID, CONCAT(Patients.firstName, ' ', Patients.lastName) AS patient, 
+Specimens.specimenType FROM Specimens
+INNER JOIN Patients ON Specimens.patientID = Patients.patientID;
 
 -- Get all laboratory tests to populate the laboratory test dropdown
 SELECT laboratoryTestID, testName FROM LaboratoryTests;

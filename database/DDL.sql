@@ -44,7 +44,7 @@ CREATE TABLE Specimens (
     FOREIGN KEY (patientID)
         REFERENCES Patients(patientID)
         ON UPDATE CASCADE
-        ON DELETE CASCADE
+        ON DELETE RESTRICT
 );
 
 CREATE TABLE SpecimenTests (
@@ -58,7 +58,7 @@ CREATE TABLE SpecimenTests (
     FOREIGN KEY (specimenID)
         REFERENCES Specimens(specimenID)
         ON UPDATE CASCADE
-        ON DELETE CASCADE,
+        ON DELETE RESTRICT,
     FOREIGN KEY (laboratoryTestID)
         REFERENCES LaboratoryTests(laboratoryTestID)
         ON UPDATE CASCADE
