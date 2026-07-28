@@ -88,23 +88,25 @@ INSERT INTO LaboratoryTests (laboratoryTestID, testName, department) VALUES
     (2, 'Basic Metabolic Panel', 'Chemistry'),
     (3, 'Complete Blood Count', 'Hematology'),
     (4, 'Prothrombin Time', 'Hematology'),
-    (5, 'Troponin', 'Chemistry');
+    (5, 'Troponin', 'Chemistry'),
+    (6, 'Magnesium', 'Chemistry');
 
 INSERT INTO Specimens (specimenID, patientID, specimenType, status) VALUES
     (1, 1, 'SST', 'Received'),
     (2, 2, 'SST', 'Processing'),
-    (3, 3, 'EDTA', 'Processing'),
-    (4, 4, 'Sodium Citrate', 'Received'),
-    (5, 5, 'Lithium Heparin', 'Completed');
+    (3, 3, 'EDTA', 'Completed'),
+    (4, 4, 'Sodium Citrate', 'Collected'),
+    (5, 5, 'Lithium Heparin', 'Collected');
 
 INSERT INTO SpecimenTests
     (specimenTestID, specimenID, laboratoryTestID, doctorID, testStatus)
 VALUES
     (1, 1, 1, 3, 'In-Lab'),
-    (2, 1, 3, 3, 'In-Lab'),
-    (3, 2, 1, 5, 'In-Lab'),
+    (2, 1, 6, 3, 'In-Lab'),
+    (3, 2, 2, 5, 'In-Lab'),
     (4, 3, 3, 4, 'Completed'),
-    (5, 4, 4, 1, 'Collected');
+    (5, 4, 4, 1, 'Ordered');
+
 
 COMMIT;
 SET FOREIGN_KEY_CHECKS = 1;

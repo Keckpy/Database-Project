@@ -20,9 +20,11 @@
         <tr>
             <td>{{this.specimenTestID}}</td>
             <td>{{this.specimenID}}</td>
-            <td>{{this.laboratoryTestID}}</td>
-            <td>{{this.doctorID}}</td>
-            <td>{{this.testStatus}}</td>
+            <td>{{this.patient}}</td>
+            <td>{{this.specimenType}}</td>
+            <td>{{this.test}}</td>
+            <td>{{this.doctor}}</td>
+            <td>{{this.status}}</td>
             
             <td>
                 {{! DELETE form }}
@@ -31,6 +33,7 @@
                     <button type='submit'>Delete</button>
                 </form>
             </td>
+            
         </tr>
         {{/each}}
     </tbody>
@@ -44,11 +47,11 @@
     <label for="update_specimen">Specimen: </label>
     <select name="update_specimen" id="update_specimen" required>
         <option value="" disabled selected>Select a Specimen</option>
-        {{#each specimens}}
+        {{!-- {{#each specimens}}
             <option value="{{this.specimenID}}" required>
                 {{this.specimenID}} - {{this.specimenType}} - {{this.status}}
             </option>
-        {{/each}}
+        {{/each}} --}}
     </select>
     </div>
 
@@ -56,11 +59,11 @@
     <label for="update_laboratory_test">Laboratory Test: </label>
     <select name="update_laboratory_test" id="update_laboratory_test" required>
         <option value="" disabled selected>Select a Test</option>
-        {{#each laboratoryTests}}
+        {{!-- {{#each laboratoryTests}}
             <option value="{{this.laboratoryTestID}}" required>
                 {{this.laboratoryTestID}} - {{this.testName}} - {{this.department}}
             </option>
-        {{/each}}
+        {{/each}} --}}
     </select>
     </div>
 
@@ -68,11 +71,11 @@
     <label for="update_doctor">Doctor: </label>
     <select name="update_doctor" id="update_doctor" required>
         <option value="" disabled selected>Select a Doctor</option>
-        {{#each doctors}}
+        {{!-- {{#each doctors}}
             <option value="{{this.doctorID}}" required>
                 {{this.doctorID}} - {{this.firstName}} {{this.lastName}} - {{this.specialty}}
             </option>
-        {{/each}}
+        {{/each}} --}}
     </select>
     </div>
 
@@ -80,7 +83,7 @@
     <label for="update_status">Status: </label>
     <select name="update_status" id="update_status" required>
         <option value="" disabled selected>Select a Status</option>
-        <option value="Collected">Collected</option>
+        <option value="Collected">Ordered</option>
         <option value="In-Lab">In-Lab</option>
         <option value="Completed">Completed</option>
     </select>
@@ -102,18 +105,18 @@
 </form> --}}
 
 {{! UPDATE form }}
-<h2>Update a SpecimenTest</h2>
+<h2>Update a Test on a Specimen</h2>
 {{!-- <p>Specimen: [dropdown] Laboratory Test: [dropdown] Doctor: [dropdown] Status: [dropdown]</p> --}}
 <form class="cuForm" id="update_specimenTest">
     <div>
         <label for="update_specimenTest">SpecimenTest to Update: </label>
         <select name="update_specimenTest" id="update_specimenTest" required>
             <option value="" disabled selected>Select a SpecimenTest</option>
-            {{#each specimenTests}}
+            {{!-- {{#each specimenTests}}
             <option value="{{this.specimenTestID}}" required>
                 {{this.specimenTestID}} - {{this.specimenID}} - {{this.laboratoryTestID}} - {{this.doctorID}} - {{this.testStatus}}
             </option>
-            {{/each}}
+            {{/each}} --}}
         </select>
     </div>
 
@@ -121,11 +124,11 @@
         <label for="update_specimen">Specimen: </label>
         <select name="update_specimen" id="update_specimen" required>
             <option value="" disabled selected>Select a Specimen</option>
-            {{#each specimens}}
+            {{!-- {{#each specimens}}
                 <option value="{{this.specimenID}}" required>
                     {{this.specimenID}} - {{this.specimenType}} - {{this.status}}
                 </option>
-            {{/each}}
+            {{/each}} --}}
         </select>
     </div>
 
@@ -133,11 +136,11 @@
         <label for="update_laboratory_test">Laboratory Test: </label>
         <select name="update_laboratory_test" id="update_laboratory_test" required>
             <option value="" disabled selected>Select a Test</option>
-            {{#each laboratoryTests}}
+            {{!-- {{#each laboratoryTests}}
                 <option value="{{this.laboratoryTestID}}" required>
                     {{this.laboratoryTestID}} - {{this.testName}} - {{this.department}}
                 </option>
-            {{/each}}
+            {{/each}} --}}
         </select>
     </div>
 
@@ -145,11 +148,11 @@
         <label for="update_doctor">Doctor: </label>
         <select name="update_doctor" id="update_doctor" required>
             <option value="" disabled selected>Select a Doctor</option>
-            {{#each doctors}}
+            {{!-- {{#each doctors}}
                 <option value="{{this.doctorID}}" required>
                     {{this.doctorID}} - {{this.firstName}} {{this.lastName}} - {{this.specialty}}
                 </option>
-            {{/each}}
+            {{/each}} --}}
         </select>
     </div>
 
@@ -157,7 +160,7 @@
         <label for="update_status">Status: </label>
         <select name="update_status" id="update_status" required>
             <option value="" disabled selected>Select a Status</option>
-            <option value="Collected">Collected</option>
+            <option value="Collected">Ordered</option>
             <option value="In-Lab">In-Lab</option>
             <option value="Completed">Completed</option>
         </select>

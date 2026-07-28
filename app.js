@@ -72,7 +72,9 @@ app.get('/doctors', async function (req, res) {
 
 app.get('/specimens', async function (req, res) {
     try {
-        const query1 = `SELECT * FROM Specimens`;
+        const query1 = `SELECT Specimens.specimenID, CONCAT(Patients.firstName, ' ', Patients.lastName) AS patient,
+        Specimens.specimenType, Specimens.status FROM Specimens
+        INNER JOIN Patients ON Specimens.patientID = Patients.patientID`;
 
         const [specimens] = await db.query(query1);
 
@@ -104,7 +106,15 @@ app.get('/laboratoryTests', async function (req, res) {
 
 app.get('/specimenTests', async function (req, res) {
     try {
-        const query1 = `SELECT * FROM SpecimenTests`;
+        const query1 = `SELECT SpecimenTests.specimenTestID, SpecimenTests.specimenID, 
+        CONCAT(Patients.firstName, ' ', Patients.lastName) AS patient,
+        Specimens.specimenType, LaboratoryTests.testName AS test,
+        CONCAT(Doctors.firstName, ' ', Doctors.lastName) AS doctor, 
+        SpecimenTests.testStatus AS status FROM SpecimenTests
+        INNER JOIN Specimens ON SpecimenTests.specimenID = Specimens.specimenID
+        INNER JOIN Patients ON Specimens.patientID = Patients.patientID
+        INNER JOIN LaboratoryTests ON SpecimenTests.laboratoryTestID = LaboratoryTests.laboratoryTestID
+        INNER JOIN Doctors ON SpecimenTests.doctorID = Doctors.doctorID`;
         const query2 = `SELECT * FROM Specimens`;
         const query3 = `SELECT * FROM LaboratoryTests`;
         const query4 = `SELECT * FROM Doctors`;
