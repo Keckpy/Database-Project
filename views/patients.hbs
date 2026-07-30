@@ -1,16 +1,3 @@
-<h1>Patients</h1>
-
-<nav>
-    <a href="/">Home</a> |
-    <a href="/patients">Patients</a> |
-    <a href="/doctors">Doctors</a> |
-    <a href="/specimens">Specimens</a> |
-    <a href="/laboratoryTests">LaboratoryTests</a> |
-    <a href="/specimenTests">SpecimenTests</a>
-</nav>
-
-<br>
-
 <table>
     <thead>
         <tr>
@@ -36,6 +23,8 @@
         {{/each}}
     </tbody>
 </table>
+
+<br>
 
 <h2>Add a Patient</h2>
 
@@ -73,10 +62,13 @@
     <button type="submit">Add Patient</button>
 </form>
 
+<br>
+
 <h2>Update a Patient</h2>
 
 <form>
     <label for="update-patientID">Patient to Update:</label>
+
     <select id="update-patientID" name="patientID" required>
         <option value="">Select a Patient</option>
 
