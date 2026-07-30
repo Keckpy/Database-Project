@@ -1,40 +1,97 @@
-
-
-{{! READ table }}
 <table>
     <thead>
-        
         <tr>
-            {{#each laboratoryTests.[0]}}
-            <th>
-                {{@key}}
-            </th>
-            {{/each}}
-            {{!-- <th></th> Use this column for DELETE --}}
+            <th>laboratoryTestID</th>
+            <th>testName</th>
+            <th>department</th>
+            <th>Delete</th>
         </tr>
     </thead>
 
     <tbody>
-        
         {{#each laboratoryTests}}
         <tr>
             <td>{{this.laboratoryTestID}}</td>
             <td>{{this.testName}}</td>
             <td>{{this.department}}</td>
-            
-            
-
-            {{!-- {{! DELETE form }}
-            <form id='delete_patient_form'>
-                <input type='hidden' name='delete_patient_id' value='{{this.patientID}}' />
-                <input type='hidden' name='delete_patient_name' value='{{this.firstName}} {{this.lastName}}' />
-                <td>
-                    <button type='submit'>
-                        Delete
-                    </button>
-                </td>
-            </form> --}}
+            <td>
+                <button type="button">Delete</button>
+            </td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+
+<br>
+
+<h2>Add a Laboratory Test</h2>
+
+<form>
+    <label for="add-testName">Test Name:</label>
+    <input
+        type="text"
+        id="add-testName"
+        name="testName"
+        required
+    >
+
+    <br><br>
+
+    <label for="add-department">Department:</label>
+    <input
+        type="text"
+        id="add-department"
+        name="department"
+        required
+    >
+
+    <br><br>
+
+    <button type="submit">Add Laboratory Test</button>
+</form>
+
+<br>
+
+<h2>Update a Laboratory Test</h2>
+
+<form>
+    <label for="update-laboratoryTestID">Test to Update:</label>
+
+    <select
+        id="update-laboratoryTestID"
+        name="laboratoryTestID"
+        required
+    >
+        <option value="">Select a Laboratory Test</option>
+
+        {{#each laboratoryTests}}
+        <option value="{{this.laboratoryTestID}}">
+            {{this.laboratoryTestID}} - {{this.testName}}
+        </option>
+        {{/each}}
+    </select>
+
+    <br><br>
+
+    <label for="update-testName">Test Name:</label>
+    <input
+        type="text"
+        id="update-testName"
+        name="testName"
+        required
+    >
+
+    <br><br>
+
+    <label for="update-department">Department:</label>
+    <input
+        type="text"
+        id="update-department"
+        name="department"
+        required
+    >
+
+    <br><br>
+
+    <button type="submit">Update Laboratory Test</button>
+</form>

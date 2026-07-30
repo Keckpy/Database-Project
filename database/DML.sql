@@ -58,3 +58,69 @@ WHERE specimenTestID = @specimenTestIDInput;
 -- Delete a SpecimenTest
 DELETE FROM SpecimenTests
 WHERE specimenTestID = @specimenTestIDInput;
+
+-- Add a new Patient
+INSERT INTO Patients (firstName, lastName, dateOfBirth)
+VALUES (@patientFirstNameInput, @patientLastNameInput, @patientDateOfBirthInput);
+
+-- Update an existing Patient
+UPDATE Patients
+SET firstName = @patientFirstNameInput,
+lastName = @patientLastNameInput,
+dateOfBirth = @patientDateOfBirthInput
+WHERE patientID = @patientIDInput;
+
+-- Delete a Patient
+DELETE FROM Patients
+WHERE patientID = @patientIDInput;
+
+
+-- Add a new Doctor
+INSERT INTO Doctors (firstName, lastName, specialty)
+VALUES (@doctorFirstNameInput, @doctorLastNameInput, @doctorSpecialtyInput);
+
+-- Update an existing Doctor
+UPDATE Doctors
+SET firstName = @doctorFirstNameInput,
+lastName = @doctorLastNameInput,
+specialty = @doctorSpecialtyInput
+WHERE doctorID = @doctorIDInput;
+
+-- Delete a Doctor
+DELETE FROM Doctors
+WHERE doctorID = @doctorIDInput;
+
+
+-- Add a new Laboratory Test
+INSERT INTO LaboratoryTests (testName, department)
+VALUES (@testNameInput, @departmentInput);
+
+-- Update an existing Laboratory Test
+UPDATE LaboratoryTests
+SET testName = @testNameInput,
+department = @departmentInput
+WHERE laboratoryTestID = @laboratoryTestIDInput;
+
+-- Delete a Laboratory Test
+DELETE FROM LaboratoryTests
+WHERE laboratoryTestID = @laboratoryTestIDInput;
+
+
+-- Get all patients to populate the patient dropdown
+SELECT patientID, firstName, lastName
+FROM Patients;
+
+-- Add a new Specimen
+INSERT INTO Specimens (patientID, specimenType, status)
+VALUES (@patientIDInput, @specimenTypeInput, @specimenStatusInput);
+
+-- Update an existing Specimen
+UPDATE Specimens
+SET patientID = @patientIDInput,
+specimenType = @specimenTypeInput,
+status = @specimenStatusInput
+WHERE specimenID = @specimenIDInput;
+
+-- Delete a Specimen
+DELETE FROM Specimens
+WHERE specimenID = @specimenIDInput;

@@ -1,40 +1,127 @@
-
-
-{{! READ table }}
 <table>
     <thead>
-        
         <tr>
-            {{#each specimens.[0]}}
-            <th>
-                {{@key}}
-            </th>
-            {{/each}}
-            {{!-- <th></th> Use this column for DELETE --}}
+            <th>specimenID</th>
+            <th>patient</th>
+            <th>specimenType</th>
+            <th>status</th>
+            <th>Delete</th>
         </tr>
     </thead>
 
     <tbody>
-        
         {{#each specimens}}
         <tr>
             <td>{{this.specimenID}}</td>
             <td>{{this.patient}}</td>
             <td>{{this.specimenType}}</td>
             <td>{{this.status}}</td>
-            
-
-            {{!-- {{! DELETE form }}
-            <form id='delete_patient_form'>
-                <input type='hidden' name='delete_patient_id' value='{{this.patientID}}' />
-                <input type='hidden' name='delete_patient_name' value='{{this.firstName}} {{this.lastName}}' />
-                <td>
-                    <button type='submit'>
-                        Delete
-                    </button>
-                </td>
-            </form> --}}
+            <td>
+                <button type="button">Delete</button>
+            </td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+
+<br>
+
+<h2>Add a Specimen</h2>
+
+<form>
+    <label for="add-patientID">Patient:</label>
+
+    <select id="add-patientID" name="patientID" required>
+        <option value="">Select a Patient</option>
+
+        {{#each patients}}
+        <option value="{{this.patientID}}">
+            {{this.patientID}} - {{this.firstName}} {{this.lastName}}
+        </option>
+        {{/each}}
+    </select>
+
+    <br><br>
+
+    <label for="add-specimenType">Specimen Type:</label>
+    <input
+        type="text"
+        id="add-specimenType"
+        name="specimenType"
+        required
+    >
+
+    <br><br>
+
+    <label for="add-status">Status:</label>
+
+    <select id="add-status" name="status" required>
+        <option value="">Select a Status</option>
+        <option value="Collected">Collected</option>
+        <option value="Received">Received</option>
+        <option value="Processing">Processing</option>
+        <option value="Completed">Completed</option>
+    </select>
+
+    <br><br>
+
+    <button type="submit">Add Specimen</button>
+</form>
+
+<br>
+
+<h2>Update a Specimen</h2>
+
+<form>
+    <label for="update-specimenID">Specimen to Update:</label>
+
+    <select id="update-specimenID" name="specimenID" required>
+        <option value="">Select a Specimen</option>
+
+        {{#each specimens}}
+        <option value="{{this.specimenID}}">
+            {{this.specimenID}} - {{this.patient}} - {{this.specimenType}}
+        </option>
+        {{/each}}
+    </select>
+
+    <br><br>
+
+    <label for="update-patientID">Patient:</label>
+
+    <select id="update-patientID" name="patientID" required>
+        <option value="">Select a Patient</option>
+
+        {{#each patients}}
+        <option value="{{this.patientID}}">
+            {{this.patientID}} - {{this.firstName}} {{this.lastName}}
+        </option>
+        {{/each}}
+    </select>
+
+    <br><br>
+
+    <label for="update-specimenType">Specimen Type:</label>
+    <input
+        type="text"
+        id="update-specimenType"
+        name="specimenType"
+        required
+    >
+
+    <br><br>
+
+    <label for="update-status">Status:</label>
+
+    <select id="update-status" name="status" required>
+        <option value="">Select a Status</option>
+        <option value="Collected">Collected</option>
+        <option value="Received">Received</option>
+        <option value="Processing">Processing</option>
+        <option value="Completed">Completed</option>
+    </select>
+
+    <br><br>
+
+    <button type="submit">Update Specimen</button>
+</form>
