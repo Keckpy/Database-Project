@@ -69,44 +69,124 @@ CREATE TABLE SpecimenTests (
         ON DELETE RESTRICT
 );
 
-INSERT INTO Patients (patientID, firstName, lastName, dateOfBirth) VALUES
-    (1, 'Malcolm', 'Whitaker', '1985-04-12'),
-    (2, 'Luciana', 'Navarro', '1972-09-23'),
-    (3, 'Darius', 'Holloway', '1990-01-15'),
-    (4, 'Celeste', 'Collatz', '1965-07-30'),
-    (5, 'Nikolai', 'Petrov', '2001-11-08');
+INSERT INTO Patients (firstName, lastName, dateOfBirth) VALUES
+    ('Malcolm', 'Whitaker', '1985-04-12'),
+    ('Luciana', 'Navarro', '1972-09-23'),
+    ('Darius', 'Holloway', '1990-01-15'),
+    ('Celeste', 'Collatz', '1965-07-30'),
+    ('Nikolai', 'Petrov', '2001-11-08');
 
-INSERT INTO Doctors (doctorID, firstName, lastName, specialty) VALUES
-    (1, 'Priya', 'Ramanathan', 'Internal Medicine'),
-    (2, 'Elias', 'Bennett', 'Cardiology'),
-    (3, 'Marisol', 'Vega', 'Emergency Medicine'),
-    (4, 'Theodore', 'Langford', 'Oncology'),
-    (5, 'Anika', 'Deshmukh', 'Pediatrics');
+INSERT INTO Doctors (firstName, lastName, specialty) VALUES
+    ('Priya', 'Ramanathan', 'Internal Medicine'),
+    ('Elias', 'Bennett', 'Cardiology'),
+    ('Marisol', 'Vega', 'Emergency Medicine'),
+    ('Theodore', 'Langford', 'Oncology'),
+    ('Anika', 'Deshmukh', 'Pediatrics');
 
-INSERT INTO LaboratoryTests (laboratoryTestID, testName, department) VALUES
-    (1, 'Comprehensive Metabolic Panel', 'Chemistry'),
-    (2, 'Basic Metabolic Panel', 'Chemistry'),
-    (3, 'Complete Blood Count', 'Hematology'),
-    (4, 'Prothrombin Time', 'Hematology'),
-    (5, 'Troponin', 'Chemistry'),
-    (6, 'Magnesium', 'Chemistry');
+INSERT INTO LaboratoryTests (testName, department) VALUES
+    ('Comprehensive Metabolic Panel', 'Chemistry'),
+    ('Basic Metabolic Panel', 'Chemistry'),
+    ('Complete Blood Count', 'Hematology'),
+    ('Prothrombin Time', 'Hematology'),
+    ('Troponin', 'Chemistry'),
+    ('Magnesium', 'Chemistry');
 
-INSERT INTO Specimens (specimenID, patientID, specimenType, status) VALUES
-    (1, 1, 'SST', 'Received'),
-    (2, 2, 'SST', 'Processing'),
-    (3, 3, 'EDTA', 'Completed'),
-    (4, 4, 'Sodium Citrate', 'Collected'),
-    (5, 5, 'Lithium Heparin', 'Collected');
+INSERT INTO Specimens (patientID, specimenType, status) VALUES
+    (
+        (SELECT patientID FROM Patients
+        WHERE firstName = 'Malcolm' AND lastName = 'Whitaker'
+        AND dateOfBirth = '1985-04-12'),
+        'SST',
+        'Received'
+    ),
+    (
+        (SELECT patientID FROM Patients
+        WHERE firstName = 'Luciana' AND lastName = 'Navarro'
+        AND dateOfBirth = '1972-09-23'),
+        'SST',
+        'Processing'
+    ),
+    (
+        (SELECT patientID FROM Patients
+        WHERE firstName = 'Darius' AND lastName = 'Holloway'
+        AND dateOfBirth = '1990-01-15'),
+        'EDTA',
+        'Completed'
+    ),
+    (
+        (SELECT patientID FROM Patients
+        WHERE firstName = 'Celeste' AND lastName = 'Collatz'
+        AND dateOfBirth = '1965-07-30'),
+        'Sodium Citrate',
+        'Collected'
+    ),
+    (
+        (SELECT patientID FROM Patients
+        WHERE firstName = 'Nikolai' AND lastName = 'Petrov'
+        AND dateOfBirth = '2001-11-08'),
+        'Lithium Heparin',
+        'Collected'
+    );
+
 
 INSERT INTO SpecimenTests
-    (specimenTestID, specimenID, laboratoryTestID, doctorID, testStatus)
+    (specimenID, laboratoryTestID, doctorID, testStatus)
 VALUES
-    (1, 1, 1, 3, 'In-Lab'),
-    (2, 1, 6, 3, 'In-Lab'),
-    (3, 2, 2, 5, 'In-Lab'),
-    (4, 3, 3, 4, 'Completed'),
-    (5, 4, 4, 1, 'Ordered');
-
+    (
+        (SELECT s.specimenID FROM Specimens s
+        JOIN Patients p ON s.patientID = p.patientID
+        WHERE p.firstName = 'Malcolm' AND p.lastName = 'Whitaker'
+        AND s.specimenType = 'SST'),
+        (SELECT laboratoryTestID FROM LaboratoryTests
+        WHERE testName = 'Comprehensive Metabolic Panel'),
+        (SELECT doctorID FROM Doctors
+        WHERE firstName = 'Marisol' AND lastName = 'Vega'),
+        'In-Lab'
+    ),
+    (
+        (SELECT s.specimenID FROM Specimens s
+        JOIN Patients p ON s.patientID = p.patientID
+        WHERE p.firstName = 'Malcolm' AND p.lastName = 'Whitaker'
+        AND s.specimenType = 'SST'),
+        (SELECT laboratoryTestID FROM LaboratoryTests
+        WHERE testName = 'Magnesium'),
+        (SELECT doctorID FROM Doctors
+        WHERE firstName = 'Marisol' AND lastName = 'Vega'),
+        'In-Lab'
+    ),
+    (
+        (SELECT s.specimenID FROM Specimens s
+        JOIN Patients p ON s.patientID = p.patientID
+        WHERE p.firstName = 'Luciana' AND p.lastName = 'Navarro'
+        AND s.specimenType = 'SST'),
+        (SELECT laboratoryTestID FROM LaboratoryTests
+        WHERE testName = 'Basic Metabolic Panel'),
+        (SELECT doctorID FROM Doctors
+        WHERE firstName = 'Anika' AND lastName = 'Deshmukh'),
+        'In-Lab'
+    ),
+    (
+        (SELECT s.specimenID FROM Specimens s
+        JOIN Patients p ON s.patientID = p.patientID
+        WHERE p.firstName = 'Darius' AND p.lastName = 'Holloway'
+        AND s.specimenType = 'EDTA'),
+        (SELECT laboratoryTestID FROM LaboratoryTests
+        WHERE testName = 'Complete Blood Count'),
+        (SELECT doctorID FROM Doctors
+        WHERE firstName = 'Theodore' AND lastName = 'Langford'),
+        'Completed'
+    ),
+    (
+        (SELECT s.specimenID FROM Specimens s
+        JOIN Patients p ON s.patientID = p.patientID
+        WHERE p.firstName = 'Celeste' AND p.lastName = 'Collatz'
+        AND s.specimenType = 'Sodium Citrate'),
+        (SELECT laboratoryTestID FROM LaboratoryTests
+        WHERE testName = 'Prothrombin Time'),
+        (SELECT doctorID FROM Doctors
+        WHERE firstName = 'Priya' AND lastName = 'Ramanathan'),
+        'Ordered'
+    );
 
 COMMIT;
 SET FOREIGN_KEY_CHECKS = 1;
