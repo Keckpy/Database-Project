@@ -1,5 +1,9 @@
 <h1>Laboratory Information System</h1>
 
+{{#if resetSuccess}}
+<p class="success-message">The database was reset and all sample data was restored.</p>
+{{/if}}
+
 <nav class="home-nav">
     <div>
         <a href="/">Home</a>
@@ -26,3 +30,15 @@
         <p>- View and manage tests associated with specimens</p>
     </div>
 </nav>
+
+<section class="reset-panel">
+    <h2>RESET Demonstration</h2>
+    <p>
+        Delete a row on the SpecimenTests page, then use this button to recreate
+        the schema and restore all five sample SpecimenTests records.
+    </p>
+    <form method="POST" action="/reset-database"
+          onsubmit="return confirm('Reset the entire database and restore the sample data?');">
+        <button class="reset-button" type="submit">RESET Database</button>
+    </form>
+</section>

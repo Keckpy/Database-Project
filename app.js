@@ -29,7 +29,9 @@ app.set('view engine', '.hbs'); // Use handlebars engine for *.hbs files.
 // READ ROUTES
 app.get('/', async function (req, res) {
     try {
-        res.render('home'); // Render the home.hbs file
+        res.render('home', {
+            resetSuccess: req.query.reset === 'success'
+        }); // Render the home.hbs file
     } catch (error) {
         console.error('Error rendering page:', error);
         // Send a generic error message to the browser
@@ -125,6 +127,7 @@ app.get('/specimenTests', async function (req, res) {
 
         res.render('specimenTests', { 
             specimenTests: specimenTests,
+            deleteSuccess: req.query.deleted === 'success',
             specimens: specimens,
             laboratoryTests: laboratoryTests,
             doctors: doctors,
@@ -136,6 +139,43 @@ app.get('/specimenTests', async function (req, res) {
         // Send a generic error message to the browser
         res.status(500).send(
             'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+// CUD ROUTES FOR THE STEP 4 RESET DEMONSTRATION
+// AI Use Citation
+// Date: 08/05/2026
+// Scope: ChatGPT helped connect the group's RESET and DELETE stored procedures
+// to Express POST routes. The code was reviewed and edited for this project.
+// Source: https://chatgpt.com/
+
+app.post('/reset-database', async function (req, res) {
+    try {
+        await db.query('CALL sp_reset_database()');
+        res.redirect('/?reset=success');
+    } catch (error) {
+        console.error('Error resetting database:', error);
+        res.status(500).send(
+            'The database could not be reset. Make sure database/DDL.sql has been imported.'
+        );
+    }
+});
+
+app.post('/specimenTests/delete/:specimenTestID', async function (req, res) {
+    const specimenTestID = Number.parseInt(req.params.specimenTestID, 10);
+
+    if (!Number.isInteger(specimenTestID) || specimenTestID <= 0) {
+        return res.status(400).send('Invalid SpecimenTest ID.');
+    }
+
+    try {
+        await db.query('CALL sp_delete_specimen_test(?)', [specimenTestID]);
+        res.redirect('/specimenTests?deleted=success');
+    } catch (error) {
+        console.error('Error deleting SpecimenTest:', error);
+        res.status(500).send(
+            'The SpecimenTest could not be deleted. Make sure database/PL.sql has been imported.'
         );
     }
 });

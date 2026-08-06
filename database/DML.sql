@@ -1,5 +1,5 @@
 -- CS340 Project Group 42 
--- Project Step 3 Draft: Design UI Interface + DML SQL
+-- Project Step 4 Draft: SELECTs + DML SQL
 -- Team Members: Brian Keck and Jackson Happel-Walvatne
 
 -- These are the Data Manipulation Queries for our Project website
@@ -56,6 +56,8 @@ testStatus = @testStatusInput
 WHERE specimenTestID = @specimenTestIDInput;
 
 -- Delete a SpecimenTest
+-- This query is implemented by sp_delete_specimen_test in PL.sql for the
+-- Step 4 DELETE/RESET demonstration.
 DELETE FROM SpecimenTests
 WHERE specimenTestID = @specimenTestIDInput;
 

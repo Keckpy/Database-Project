@@ -118,3 +118,44 @@ tr:nth-child(even) {background-color: #f9f9f9;}
 input, select { margin-bottom: 4px;margin-right: 12px;}
 
 
+
+/* Step 4 RESET and DELETE demonstration */
+.success-message {
+    background-color: #e8f5e9;
+    border: 1px solid #7cb982;
+    border-radius: 4px;
+    padding: 10px 14px;
+    text-align: center;
+}
+
+.reset-panel {
+    background-color: #fff;
+    border: 1px solid #c8cdd2;
+    border-radius: 6px;
+    max-width: 620px;
+    padding: 20px;
+    text-align: center;
+}
+
+.reset-panel h2,
+.reset-panel p {
+    margin-bottom: 12px;
+}
+
+.reset-button {
+    background-color: #b42318;
+    border: 0;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 700;
+    padding: 10px 18px;
+}
+
+.reset-button:hover {
+    background-color: #8f1c13;
+}
+
+.inline-form {
+    display: inline;
+}

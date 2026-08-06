@@ -1,14 +1,16 @@
-const fs = require('fs');
 const db = require('./db-connector');
-
-const ddl = fs.readFileSync(__dirname + '/DDL.sql', 'utf8');
 
 async function resetDatabase() {
     try {
-        await db.query(ddl);
+        await db.query('CALL sp_reset_database()');
         console.log('---Database reset---');
     } catch (error) {
-        console.error('Database reset failed: ', error);
+        console.error(
+            'Database reset failed. Import database/DDL.sql first so ' +
+            'sp_reset_database exists:',
+            error
+        );
+        process.exitCode = 1;
     } finally {
         await db.end();
     }

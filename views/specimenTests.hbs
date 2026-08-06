@@ -1,4 +1,6 @@
-
+{{#if deleteSuccess}}
+<p class="success-message">The SpecimenTest was deleted. Use the RESET button on the homepage to restore it.</p>
+{{/if}}
 
 {{! READ table }}
 <table>
@@ -28,9 +30,10 @@
             
             <td>
                 {{! DELETE form }}
-                <form id='delete_specimenTest_form'>
-                    <input type='hidden' name='delete_specimenTest_id' value='{{this.specimenTestID}}' />
-                    <button type='submit'>Delete</button>
+                <form class="inline-form" method="POST"
+                      action="/specimenTests/delete/{{this.specimenTestID}}"
+                      onsubmit="return confirm('Delete this SpecimenTest?');">
+                    <button type="submit">Delete</button>
                 </form>
             </td>
             
