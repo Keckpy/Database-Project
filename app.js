@@ -77,10 +77,12 @@ app.get('/specimens', async function (req, res) {
         const query1 = `SELECT Specimens.specimenID, CONCAT(Patients.firstName, ' ', Patients.lastName) AS patient,
         Specimens.specimenType, Specimens.status FROM Specimens
         INNER JOIN Patients ON Specimens.patientID = Patients.patientID`;
+        const query2 = `SELECT patientID, firstName, lastName FROM Patients`;
 
         const [specimens] = await db.query(query1);
+        const [patients] = await db.query(query2);
 
-        res.render('specimens', { specimens: specimens, pageTitle: 'Specimens', showNav: true });
+        res.render('specimens', { specimens: specimens, patients: patients, pageTitle: 'Specimens', showNav: true });
     } catch (error) {
         console.error('Error executing queries:', error);
         // Send a generic error message to the browser
