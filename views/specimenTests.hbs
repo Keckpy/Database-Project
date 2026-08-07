@@ -1,3 +1,10 @@
+{{!-- 
+Citation for starter code:
+Date: 07/25/2026
+Copied from:
+Source URL: https://canvas.oregonstate.edu/courses/2051721/pages/exploration-web-application-technology-2?module_item_id=26923351 
+--}}
+
 {{#if deleteSuccess}}
 <p class="success-message">The SpecimenTest was deleted. Use the RESET button on the homepage to restore it.</p>
 {{/if}}
@@ -94,44 +101,21 @@
     
     <button type="submit">Add</button>
 </form>
-{{!-- <form class='cuForm' id='create_patient_form'>
-    <label for='create_patient_firstName'>First Name: </label>
-    <input type='text' name='create_patient_firstName' id='create_patient_firstName' required />
 
-    <label for='create_patient_lastName'>Last Name: </label>
-    <input type='text' name='create_patient_lastName' id='create_patient_lastName' required />
-
-    <label for='create_patient_dob'>DOB:</label>
-    <input type='date' name='create_patient_dob' id='create_patient_dob' required />
-
-    <input type='submit' />
-</form> --}}
 
 {{! UPDATE form }}
-<h2>Update a Test on a Specimen</h2>
+<h2>Update a SpecimenTest</h2>
 {{!-- <p>Specimen: [dropdown] Laboratory Test: [dropdown] Doctor: [dropdown] Status: [dropdown]</p> --}}
 <form class="cuForm" id="update_specimenTest">
     <div>
         <label for="update_specimenTest">SpecimenTest to Update: </label>
         <select name="update_specimenTest" id="update_specimenTest" required>
             <option value="" disabled selected>Select a SpecimenTest</option>
-            {{!-- {{#each specimenTests}}
+            {{#each specimenTests}}
             <option value="{{this.specimenTestID}}" required>
-                {{this.specimenTestID}} - {{this.specimenID}} - {{this.laboratoryTestID}} - {{this.doctorID}} - {{this.testStatus}}
+                {{this.specimenTestID}} - {{this.patient}} - {{this.test}}
             </option>
-            {{/each}} --}}
-        </select>
-    </div>
-
-    <div>
-        <label for="update_specimen">Specimen: </label>
-        <select name="update_specimen" id="update_specimen" required>
-            <option value="" disabled selected>Select a Specimen</option>
-            {{!-- {{#each specimens}}
-                <option value="{{this.specimenID}}" required>
-                    {{this.specimenID}} - {{this.specimenType}} - {{this.status}}
-                </option>
-            {{/each}} --}}
+            {{/each}}
         </select>
     </div>
 
@@ -139,11 +123,11 @@
         <label for="update_laboratory_test">Laboratory Test: </label>
         <select name="update_laboratory_test" id="update_laboratory_test" required>
             <option value="" disabled selected>Select a Test</option>
-            {{!-- {{#each laboratoryTests}}
+            {{#each laboratoryTests}}
                 <option value="{{this.laboratoryTestID}}" required>
-                    {{this.laboratoryTestID}} - {{this.testName}} - {{this.department}}
+                    {{this.testName}}
                 </option>
-            {{/each}} --}}
+            {{/each}}
         </select>
     </div>
 
@@ -151,11 +135,11 @@
         <label for="update_doctor">Doctor: </label>
         <select name="update_doctor" id="update_doctor" required>
             <option value="" disabled selected>Select a Doctor</option>
-            {{!-- {{#each doctors}}
+            {{#each doctors}}
                 <option value="{{this.doctorID}}" required>
-                    {{this.doctorID}} - {{this.firstName}} {{this.lastName}} - {{this.specialty}}
+                    {{this.doctorName}}
                 </option>
-            {{/each}} --}}
+            {{/each}}
         </select>
     </div>
 
@@ -171,33 +155,3 @@
 
     <button type="submit">Update</button>
 </form>
-{{!-- <form class='cuForm' id='update_person_form'>
-    <label for='update_person_id'>Person to Update: </label>
-    <select name='update_person_id' id='update_person_id' required>
-        <option value='' disabled selected>Select a Person</option>
-        {{#each people}}
-        <option value='{{this.id}}' required>
-            {{this.id}}
-            -
-            {{this.fname}}
-            {{this.lname}}
-        </option>
-        {{/each}}
-    </select>
-
-    <label for='update_person_homeworld'>Homeworld: </label>
-    <select name='update_person_homeworld' id='update_person_homeworld'>
-        <option value='NULL' disabled selected>Select a Planet</option>
-        <option value='NULL'>&lt; None &gt;</option>
-        {{#each homeworlds}}
-        <option value='{{this.id}}' required>
-            {{this.name}}
-        </option>
-        {{/each}}
-    </select>
-
-    <label for='update_person_age'>Age: </label>
-    <input type='number' name='update_person_age' id='update_person_age' min='0' />
-
-    <input type='submit' />
-</form> --}}

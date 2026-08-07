@@ -1,3 +1,8 @@
+// Citation for starter code:
+// Date: 07/25/2026
+// Copied from:
+// Source URL: https://canvas.oregonstate.edu/courses/2051721/pages/exploration-web-application-technology-2?module_item_id=26923351
+
 // Uses .env file to hide database credentials
 require('dotenv').config()
 

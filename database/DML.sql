@@ -24,7 +24,7 @@ Specimens.specimenType, Specimens.status FROM Specimens
 INNER JOIN Patients ON Specimens.patientID = Patients.patientID;
 
 -- Get all specimen tests with associated laboratory test and doctor information
--- for the SpecimenTests page
+-- for the SpecimenTests page and also use for the Update SpecimenTest dropdown
 SELECT SpecimenTests.specimenTestID, SpecimenTests.specimenID, CONCAT(Patients.firstName, ' ', Patients.lastName) AS patient,
 Specimens.specimenType, LaboratoryTests.testName AS test,
 CONCAT(Doctors.firstName, ' ', Doctors.lastName) AS doctor, SpecimenTests.testStatus AS status 
@@ -51,7 +51,7 @@ VALUES (@specimenIDInput, @laboratoryTestIDInput, @doctorIDInput, @testStatusInp
 
 -- Update an existing SpecimenTest
 UPDATE SpecimenTests
-SET specimenID = @specimenIDInput, laboratoryTestID = @laboratoryTestIDInput, doctorID = @doctorIDInput,
+SET laboratoryTestID = @laboratoryTestIDInput, doctorID = @doctorIDInput,
 testStatus = @testStatusInput
 WHERE specimenTestID = @specimenTestIDInput;
 
