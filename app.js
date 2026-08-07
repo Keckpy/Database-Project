@@ -117,9 +117,11 @@ app.get('/specimenTests', async function (req, res) {
         INNER JOIN Patients ON Specimens.patientID = Patients.patientID
         INNER JOIN LaboratoryTests ON SpecimenTests.laboratoryTestID = LaboratoryTests.laboratoryTestID
         INNER JOIN Doctors ON SpecimenTests.doctorID = Doctors.doctorID`;
-        const query2 = `SELECT * FROM Specimens`;
+        const query2 = `SELECT Specimens.specimenID, CONCAT(Patients.firstName, ' ', Patients.lastName) AS patient, 
+                        Specimens.specimenType FROM Specimens
+                        INNER JOIN Patients ON Specimens.patientID = Patients.patientID`;
         const query3 = `SELECT * FROM LaboratoryTests`;
-        const query4 = `SELECT * FROM Doctors`;
+        const query4 = `SELECT doctorID, CONCAT(firstName, ' ', lastName) AS doctorName FROM Doctors`;
         const [specimenTests] = await db.query(query1);
         const [specimens] = await db.query(query2);
         const [laboratoryTests] = await db.query(query3);
