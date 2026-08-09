@@ -38,7 +38,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2051721/pages/exploration-web
 
 <h2>Add a Doctor</h2>
 
-<form class="cuForm">
+<form class="cuForm" id="add-doctor-form" method="POST" action="/doctors/add">
     <label for="add-firstName">First Name:</label>
     <input
         type="text"
@@ -60,12 +60,14 @@ Source URL: https://canvas.oregonstate.edu/courses/2051721/pages/exploration-web
     <br><br>
 
     <label for="add-specialty">Specialty:</label>
-    <input
-        type="text"
-        id="add-specialty"
-        name="specialty"
-        required
-    >
+    <select id="add-specialty" name="specialty" required>
+        <option value="">Select a Specialty</option>
+        <option value="Internal Medicine">Internal Medicine</option>
+        <option value="Cardiology">Cardiology</option>
+        <option value="Emergency Medicine">Emergency Medicine</option>
+        <option value="Oncology">Oncology/option>
+        <option value="Pediatrics">Pediatrics</option>
+    </select>
 
     <br><br>
 

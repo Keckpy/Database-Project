@@ -17,6 +17,8 @@ DROP PROCEDURE IF EXISTS sp_add_specimen_test;
 
 DROP PROCEDURE IF EXISTS sp_add_laboratory_test;
 
+DROP PROCEDURE IF EXISTS sp_add_doctor;
+
 DELIMITER //
 
 CREATE PROCEDURE sp_delete_specimen_test(
@@ -64,6 +66,20 @@ CREATE PROCEDURE sp_add_laboratory_test(
 BEGIN
     INSERT INTO LaboratoryTests (testName, department)
     VALUES (p_testName, p_department);
+
+    SELECT LAST_INSERT_ID() INTO p_id;
+    SELECT p_id AS new_id;
+END //
+
+CREATE PROCEDURE sp_add_doctor(
+    IN p_firstName VARCHAR(50),
+    IN p_lastName VARCHAR(50),
+    IN p_specialty VARCHAR(75),
+    OUT p_id INT
+)
+BEGIN
+    INSERT INTO Doctors (firstName, lastName, specialty)
+    VALUES (p_firstName, p_lastName, p_specialty);
 
     SELECT LAST_INSERT_ID() INTO p_id;
     SELECT p_id AS new_id;

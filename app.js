@@ -285,6 +285,37 @@ app.post('/laboratoryTests/add', async function (req, res) {
     }
 });
 
+app.post('/doctors/add', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+
+        // Use parameterized queries to prevent SQL injection attacks
+        const query1 = `CALL sp_add_doctor(?, ?, ?, @new_id);`;
+
+        // Store ID of last inserted row
+        const [[[rows]]] = await db.query(query1, [
+            data.firstName,
+            data.lastName,
+            data.specialty
+        ]);
+
+        console.log(`CREATE Doctors. ID: ${rows.new_id} ` +
+            `Name: ${data.firstName}` + `${data.lastName}` + 
+            `Specialty: ${data.specialty}`
+        );
+
+        // Redirect the user to the updated webpage
+        res.redirect('/doctors');
+    } catch (error) {
+        console.error('Error executing queries', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
 // ########################################
 // ########## LISTENER
 
