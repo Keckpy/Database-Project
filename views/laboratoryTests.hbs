@@ -22,7 +22,10 @@ Source URL: https://canvas.oregonstate.edu/courses/2051721/pages/exploration-web
             <td>{{this.testName}}</td>
             <td>{{this.department}}</td>
             <td>
-                <button type="button">Delete</button>
+                <form action="">
+                    <button type="button">Delete</button>
+                </form>
+                
             </td>
         </tr>
         {{/each}}
@@ -33,7 +36,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2051721/pages/exploration-web
 
 <h2>Add a Laboratory Test</h2>
 
-<form>
+<form class="cuForm">
     <label for="add-testName">Test Name:</label>
     <input
         type="text"
@@ -61,7 +64,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2051721/pages/exploration-web
 
 <h2>Update a Laboratory Test</h2>
 
-<form>
+<form class="cuForm">
     <label for="update-laboratoryTestID">Test to Update:</label>
 
     <select

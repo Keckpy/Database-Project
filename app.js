@@ -118,7 +118,8 @@ app.get('/specimenTests', async function (req, res) {
         INNER JOIN Specimens ON SpecimenTests.specimenID = Specimens.specimenID
         INNER JOIN Patients ON Specimens.patientID = Patients.patientID
         INNER JOIN LaboratoryTests ON SpecimenTests.laboratoryTestID = LaboratoryTests.laboratoryTestID
-        INNER JOIN Doctors ON SpecimenTests.doctorID = Doctors.doctorID`;
+        INNER JOIN Doctors ON SpecimenTests.doctorID = Doctors.doctorID
+        ORDER BY SpecimenTests.specimenTestID`;
         const query2 = `SELECT Specimens.specimenID, CONCAT(Patients.firstName, ' ', Patients.lastName) AS patient, 
                         Specimens.specimenType FROM Specimens
                         INNER JOIN Patients ON Specimens.patientID = Patients.patientID`;
@@ -184,12 +185,14 @@ app.post('/specimenTests/delete/:specimenTestID', async function (req, res) {
     }
 });
 
-// CREATE ROUTES
+
+// --- CREATE ROUTES ---
 
 // Citation for starter code:
 // Date: 08/09/2026
 // Copied from:
 // Source URL: https://canvas.oregonstate.edu/courses/2051721/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=26923368
+
 app.post('/specimens/add', async function (req, res) {
     try {
         // Parse frontend form information
@@ -205,13 +208,45 @@ app.post('/specimens/add', async function (req, res) {
             data.status
         ]);
 
-        console.log(`CREATE specimens. ID: ${rows.new_id} ` +
+        console.log(`CREATE Specimens. ID: ${rows.new_id} ` +
             `Patient ID: ${data.patientID}` + `Specimen Type: ${data.specimenType}` +
             `Status: ${data.status}`
         );
 
         // Redirect the user to the updated webpage
         res.redirect('/specimens');
+    } catch (error) {
+        console.error('Error executing queries', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+app.post('/specimenTests/add', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+
+        // Use parameterized queries to prevent SQL injection attacks
+        const query1 = `CALL sp_add_specimen_test(?, ?, ?, ?, @new_id);`;
+
+        // Store ID of last inserted row
+        const [[[rows]]] = await db.query(query1, [
+            data.specimenID,
+            data.laboratoryTestID,
+            data.doctorID,
+            data.status
+        ]);
+
+        console.log(`CREATE SpecimenTests. ID: ${rows.new_id} ` +
+            `Specimen ID: ${data.specimenID}` + `LaboratoryTests ID: ${data.laboratoryTestID}` +
+            `Doctor ID: ${data.doctorID}` + `Status: ${data.status}`
+        );
+
+        // Redirect the user to the updated webpage
+        res.redirect('/specimenTests');
     } catch (error) {
         console.error('Error executing queries', error);
         // Send a generic error message to the browser

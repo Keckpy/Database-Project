@@ -24,7 +24,10 @@ Source URL: https://canvas.oregonstate.edu/courses/2051721/pages/exploration-web
             <td>{{this.specimenType}}</td>
             <td>{{this.status}}</td>
             <td>
-                <button type="button">Delete</button>
+                <form action="">
+                    <button type="button">Delete</button>
+                </form>
+                
             </td>
         </tr>
         {{/each}}
@@ -35,7 +38,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2051721/pages/exploration-web
 
 <h2>Add a Specimen</h2>
 
-<form id="add-specimen-form" method="POST" action="/specimens/add">
+<form class="cuForm" id="add-specimen-form" method="POST" action="/specimens/add">
     <label for="add-patientID">Patient:</label>
 
     <select id="add-patientID" name="patientID" required>
@@ -80,7 +83,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2051721/pages/exploration-web
 
 <h2>Update a Specimen</h2>
 
-<form>
+<form class="cuForm">
     <label for="update-specimenID">Specimen to Update:</label>
 
     <select id="update-specimenID" name="specimenID" required>

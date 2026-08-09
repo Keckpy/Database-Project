@@ -51,11 +51,10 @@ Source URL: https://canvas.oregonstate.edu/courses/2051721/pages/exploration-web
 
 {{! CREATE form }}
 <h2>Add a SpecimenTest</h2>
-{{!-- <p>Specimen: [dropdown] Laboratory Test: [dropdown] Doctor: [dropdown] Status: [dropdown]</p> --}}
-<form class="cuForm" id="add_specimenTest">
+<form class="cuForm" id="add-specimenTest-form" method="POST" action="/specimenTests/add">
     <div>
-    <label for="update_specimen">Specimen: </label>
-    <select name="update_specimen" id="update_specimen" required>
+    <label for="add-specimenID">Specimen: </label>
+    <select id="add-specimenID" name="specimenID"  required>
         <option value="" disabled selected>Select a Specimen</option>
         {{#each specimens}}
             <option value="{{this.specimenID}}" required>
@@ -66,8 +65,8 @@ Source URL: https://canvas.oregonstate.edu/courses/2051721/pages/exploration-web
     </div>
 
     <div>
-    <label for="update_laboratory_test">Laboratory Test: </label>
-    <select name="update_laboratory_test" id="update_laboratory_test" required>
+    <label for="add-laboratory-test">Laboratory Test: </label>
+    <select id="add-laboratory-test" name="laboratoryTestID"  required>
         <option value="" disabled selected>Select a Test</option>
         {{#each laboratoryTests}}
             <option value="{{this.laboratoryTestID}}" required>
@@ -78,8 +77,8 @@ Source URL: https://canvas.oregonstate.edu/courses/2051721/pages/exploration-web
     </div>
 
     <div>
-    <label for="update_doctor">Doctor: </label>
-    <select name="update_doctor" id="update_doctor" required>
+    <label for="add-doctor">Doctor: </label>
+    <select id="add-doctor" name="doctorID"  required>
         <option value="" disabled selected>Select a Doctor</option>
         {{#each doctors}}
             <option value="{{this.doctorID}}" required>
@@ -90,8 +89,8 @@ Source URL: https://canvas.oregonstate.edu/courses/2051721/pages/exploration-web
     </div>
 
     <div>
-    <label for="update_status">Status: </label>
-    <select name="update_status" id="update_status" required>
+    <label for="add-status">Status: </label>
+    <select id="add-status" name="status"  required>
         <option value="" disabled selected>Select a Status</option>
         <option value="Collected">Ordered</option>
         <option value="In-Lab">In-Lab</option>

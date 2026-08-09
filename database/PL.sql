@@ -13,6 +13,7 @@
 
 DROP PROCEDURE IF EXISTS sp_delete_specimen_test;
 DROP PROCEDURE IF EXISTS sp_add_specimen;
+DROP PROCEDURE IF EXISTS sp_add_specimen_test;
 
 DELIMITER //
 
@@ -38,4 +39,18 @@ BEGIN
     SELECT p_id AS new_id;
 END //
 
+CREATE PROCEDURE sp_add_specimen_test(
+    IN p_specimenID INT,
+    IN p_laboratoryTestID INT,
+    IN p_doctorID INT,
+    IN p_status VARCHAR(25),
+    OUT p_id INT
+)
+BEGIN
+    INSERT INTO SpecimenTests (specimenID, laboratoryTestID, doctorID, testStatus)
+    VALUES (p_specimenID, p_laboratoryTestID, p_doctorID, p_status);
+
+    SELECT LAST_INSERT_ID() INTO p_id;
+    SELECT p_id AS new_id;
+END //
 DELIMITER ;
