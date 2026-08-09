@@ -12,6 +12,7 @@
 -- Source: https://chatgpt.com/
 
 DROP PROCEDURE IF EXISTS sp_delete_specimen_test;
+DROP PROCEDURE IF EXISTS sp_add_specimen;
 
 DELIMITER //
 
@@ -21,6 +22,20 @@ CREATE PROCEDURE sp_delete_specimen_test(
 BEGIN
     DELETE FROM SpecimenTests
     WHERE specimenTestID = p_specimenTestID;
+END //
+
+CREATE PROCEDURE sp_add_specimen(
+    IN p_patientID INT,
+    IN p_specimenType VARCHAR(50),
+    IN p_status VARCHAR(50),
+    OUT p_id INT
+)
+BEGIN
+    INSERT INTO Specimens (patientID, specimenType, status)
+    VALUES (p_patientID, p_specimenType, p_status);
+
+    SELECT LAST_INSERT_ID() INTO p_id;
+    SELECT p_id AS new_id;
 END //
 
 DELIMITER ;

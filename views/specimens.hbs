@@ -35,7 +35,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2051721/pages/exploration-web
 
 <h2>Add a Specimen</h2>
 
-<form>
+<form id="add-specimen-form" method="POST" action="/specimens/add">
     <label for="add-patientID">Patient:</label>
 
     <select id="add-patientID" name="patientID" required>
@@ -51,12 +51,13 @@ Source URL: https://canvas.oregonstate.edu/courses/2051721/pages/exploration-web
     <br><br>
 
     <label for="add-specimenType">Specimen Type:</label>
-    <input
-        type="text"
-        id="add-specimenType"
-        name="specimenType"
-        required
-    >
+    <select id="add-specimenType" name="specimenType" required>
+        <option value="">Select a Specimen Type</option>
+        <option value="SST">SST</option>
+        <option value="EDTA">EDTA</option>
+        <option value="Sodium Citrate">Sodium Citrate</option>
+        <option value="Lithium Heparin">Lithium Heparin</option>
+    </select>
 
     <br><br>
 

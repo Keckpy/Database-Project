@@ -184,6 +184,43 @@ app.post('/specimenTests/delete/:specimenTestID', async function (req, res) {
     }
 });
 
+// CREATE ROUTES
+
+// Citation for starter code:
+// Date: 08/09/2026
+// Copied from:
+// Source URL: https://canvas.oregonstate.edu/courses/2051721/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=26923368
+app.post('/specimens/add', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+
+        // Use parameterized queries to prevent SQL injection attacks
+        const query1 = `CALL sp_add_specimen(?, ?, ?, @new_id);`;
+
+        // Store ID of last inserted row
+        const [[[rows]]] = await db.query(query1, [
+            data.patientID,
+            data.specimenType,
+            data.status
+        ]);
+
+        console.log(`CREATE specimens. ID: ${rows.new_id} ` +
+            `Patient ID: ${data.patientID}` + `Specimen Type: ${data.specimenType}` +
+            `Status: ${data.status}`
+        );
+
+        // Redirect the user to the updated webpage
+        res.redirect('/specimens');
+    } catch (error) {
+        console.error('Error executing queries', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
 // ########################################
 // ########## LISTENER
 
