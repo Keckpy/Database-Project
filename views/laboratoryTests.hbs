@@ -36,7 +36,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2051721/pages/exploration-web
 
 <h2>Add a Laboratory Test</h2>
 
-<form class="cuForm">
+<form class="cuForm" id="add-test-form" method="POST" action="/laboratoryTests/add">
     <label for="add-testName">Test Name:</label>
     <input
         type="text"
@@ -48,12 +48,11 @@ Source URL: https://canvas.oregonstate.edu/courses/2051721/pages/exploration-web
     <br><br>
 
     <label for="add-department">Department:</label>
-    <input
-        type="text"
-        id="add-department"
-        name="department"
-        required
-    >
+    <select id="add-department" name="department" required>
+        <option value="">Select a Department</option>
+        <option value="Chemistry">Chemistry</option>
+        <option value="Hematology">Hematology</option>
+    </select>
 
     <br><br>
 

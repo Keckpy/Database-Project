@@ -256,6 +256,35 @@ app.post('/specimenTests/add', async function (req, res) {
     }
 });
 
+app.post('/laboratoryTests/add', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+
+        // Use parameterized queries to prevent SQL injection attacks
+        const query1 = `CALL sp_add_laboratory_test(?, ?, @new_id);`;
+
+        // Store ID of last inserted row
+        const [[[rows]]] = await db.query(query1, [
+            data.testName,
+            data.department,
+        ]);
+
+        console.log(`CREATE LaboratoryTests. ID: ${rows.new_id} ` +
+            `Test: ${data.testName}` + `Department: ${data.department}`
+        );
+
+        // Redirect the user to the updated webpage
+        res.redirect('/laboratoryTests');
+    } catch (error) {
+        console.error('Error executing queries', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
 // ########################################
 // ########## LISTENER
 
