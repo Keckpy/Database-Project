@@ -209,7 +209,7 @@ app.post('/specimens/add', async function (req, res) {
         ]);
 
         console.log(`CREATE Specimens. ID: ${rows.new_id} ` +
-            `Patient ID: ${data.patientID}` + `Specimen Type: ${data.specimenType}` +
+            `Patient ID: ${data.patientID} ` + `Specimen Type: ${data.specimenType} ` +
             `Status: ${data.status}`
         );
 
@@ -241,8 +241,8 @@ app.post('/specimenTests/add', async function (req, res) {
         ]);
 
         console.log(`CREATE SpecimenTests. ID: ${rows.new_id} ` +
-            `Specimen ID: ${data.specimenID}` + `LaboratoryTests ID: ${data.laboratoryTestID}` +
-            `Doctor ID: ${data.doctorID}` + `Status: ${data.status}`
+            `Specimen ID: ${data.specimenID} ` + `LaboratoryTests ID: ${data.laboratoryTestID} ` +
+            `Doctor ID: ${data.doctorID} ` + `Status: ${data.status}`
         );
 
         // Redirect the user to the updated webpage
@@ -271,7 +271,7 @@ app.post('/laboratoryTests/add', async function (req, res) {
         ]);
 
         console.log(`CREATE LaboratoryTests. ID: ${rows.new_id} ` +
-            `Test: ${data.testName}` + `Department: ${data.department}`
+            `Test: ${data.testName} ` + `Department: ${data.department}`
         );
 
         // Redirect the user to the updated webpage
@@ -301,7 +301,7 @@ app.post('/doctors/add', async function (req, res) {
         ]);
 
         console.log(`CREATE Doctors. ID: ${rows.new_id} ` +
-            `Name: ${data.firstName}` + `${data.lastName}` + 
+            `Name: ${data.firstName} ` + `${data.lastName} ` + 
             `Specialty: ${data.specialty}`
         );
 
@@ -316,6 +316,36 @@ app.post('/doctors/add', async function (req, res) {
     }
 });
 
+app.post('/patients/add', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+
+        // Use parameterized queries to prevent SQL injection attacks
+        const query1 = `CALL sp_add_patient(?, ?, ?, @new_id);`;
+
+        // Store ID of last inserted row
+        const [[[rows]]] = await db.query(query1, [
+            data.firstName,
+            data.lastName,
+            data.dateOfBirth
+        ]);
+
+        console.log(`CREATE Patients. ID: ${rows.new_id} ` +
+            `Name: ${data.firstName} ` + `${data.lastName} ` + 
+            `DOB: ${data.dateOfBirth}`
+        );
+
+        // Redirect the user to the updated webpage
+        res.redirect('/patients');
+    } catch (error) {
+        console.error('Error executing queries', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
 // ########################################
 // ########## LISTENER
 

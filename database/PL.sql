@@ -18,6 +18,7 @@ DROP PROCEDURE IF EXISTS sp_add_specimen_test;
 DROP PROCEDURE IF EXISTS sp_add_laboratory_test;
 
 DROP PROCEDURE IF EXISTS sp_add_doctor;
+DROP PROCEDURE IF EXISTS sp_add_patient;
 
 DELIMITER //
 
@@ -80,6 +81,20 @@ CREATE PROCEDURE sp_add_doctor(
 BEGIN
     INSERT INTO Doctors (firstName, lastName, specialty)
     VALUES (p_firstName, p_lastName, p_specialty);
+
+    SELECT LAST_INSERT_ID() INTO p_id;
+    SELECT p_id AS new_id;
+END //
+
+CREATE PROCEDURE sp_add_patient(
+    IN p_firstName VARCHAR(50),
+    IN p_lastName VARCHAR(50),
+    IN p_dateOfBirth DATE,
+    OUT p_id INT
+)
+BEGIN
+    INSERT INTO Patients (firstName, lastName, dateOfBirth)
+    VALUES (p_firstName, p_lastName, p_dateOfBirth);
 
     SELECT LAST_INSERT_ID() INTO p_id;
     SELECT p_id AS new_id;
