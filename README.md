@@ -57,20 +57,19 @@ and stored procedures.
 
 ## Citations
 
+### Starter Code
 > Starter Code templates were used from Canvas Explorations for most files.
 
-Citation for starter code:
-Date: 07/25/2026
-Copied from:
-Source URL: https://canvas.oregonstate.edu/courses/2051721/pages/exploration-web-application-technology-2?module_item_id=26923351
+- Date: 07/25/2026
+- Source URL: [OSU Canvas Exploration](https://canvas.oregonstate.edu/courses/2051721/pages/exploration-web-application-technology-2?module_item_id=26923351)
 
+### AI Use Citation
 > PL.SQL and select code blocks were made with the aide of Chatgpt
 
-AI Use Citation
-Date: 08/05/2026
-Scope: ChatGPT helped draft the DELETE stored procedure used to demonstrate
-that the RESET procedure restores removed sample data.
-Prompt synopsis: Create a parameterized stored procedure that deletes one
-pecimenTests row for the Step 4 RESET demonstration.
-Originality: The procedure was reviewed and edited for the group's schema.
-Source: https://chatgpt.com/
+- Date: 08/05/2026
+- Scope: ChatGPT helped draft the DELETE stored procedure used to demonstrate
+- that the RESET procedure restores removed sample data.
+- Prompt synopsis: Create a parameterized stored procedure that deletes one
+- SpecimenTests row for the Step 4 RESET demonstration.
+- Originality: The procedure was reviewed and edited for the group's schema.
+- Source: [ChatGPT](https://chatgpt.com/)
