@@ -91,34 +91,21 @@ Source URL: https://canvas.oregonstate.edu/courses/2051721/pages/exploration-web
 
         {{#each specimens}}
         <option value="{{this.specimenID}}">
-            {{this.specimenID}} - {{this.patient}} - {{this.specimenType}}
+            {{this.specimenID}} - {{this.patient}}
         </option>
         {{/each}}
     </select>
 
     <br><br>
-
-    <label for="update-patientID">Patient:</label>
-
-    <select id="update-patientID" name="patientID" required>
-        <option value="">Select a Patient</option>
-
-        {{#each patients}}
-        <option value="{{this.patientID}}">
-            {{this.patientID}} - {{this.firstName}} {{this.lastName}}
-        </option>
-        {{/each}}
+    
+    <label for="add-specimenType">Specimen Type:</label>
+    <select id="add-specimenType" name="specimenType" required>
+        <option value="">Select a Specimen Type</option>
+        <option value="SST">SST</option>
+        <option value="EDTA">EDTA</option>
+        <option value="Sodium Citrate">Sodium Citrate</option>
+        <option value="Lithium Heparin">Lithium Heparin</option>
     </select>
-
-    <br><br>
-
-    <label for="update-specimenType">Specimen Type:</label>
-    <input
-        type="text"
-        id="update-specimenType"
-        name="specimenType"
-        required
-    >
 
     <br><br>
 
