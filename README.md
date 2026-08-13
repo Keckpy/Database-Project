@@ -58,12 +58,14 @@ and stored procedures.
 ## Citations
 
 > Starter Code templates were used from Canvas Explorations for most files.
+
 Citation for starter code:
 Date: 07/25/2026
 Copied from:
 Source URL: https://canvas.oregonstate.edu/courses/2051721/pages/exploration-web-application-technology-2?module_item_id=26923351
 
 > PL.SQL and select code blocks were made with the aide of Chatgpt
+
 AI Use Citation
 Date: 08/05/2026
 Scope: ChatGPT helped draft the DELETE stored procedure used to demonstrate
