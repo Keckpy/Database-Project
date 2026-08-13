@@ -9,6 +9,10 @@ Source URL: https://canvas.oregonstate.edu/courses/2051721/pages/exploration-web
 <p class="success-message">The SpecimenTest was deleted. Use the RESET button on the homepage to restore it.</p>
 {{/if}}
 
+{{#if updateSuccess}}
+<p class="success-message">The SpecimenTest was updated successfully.</p>
+{{/if}}
+
 {{! READ table }}
 <table>
     <thead>
@@ -92,7 +96,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2051721/pages/exploration-web
     <label for="add-status">Status: </label>
     <select id="add-status" name="status"  required>
         <option value="" disabled selected>Select a Status</option>
-        <option value="Collected">Ordered</option>
+        <option value="Ordered">Ordered</option>
         <option value="In-Lab">In-Lab</option>
         <option value="Completed">Completed</option>
     </select>
@@ -105,10 +109,18 @@ Source URL: https://canvas.oregonstate.edu/courses/2051721/pages/exploration-web
 {{! UPDATE form }}
 <h2>Update a SpecimenTest</h2>
 {{!-- <p>Specimen: [dropdown] Laboratory Test: [dropdown] Doctor: [dropdown] Status: [dropdown]</p> --}}
-<form class="cuForm" id="update_specimenTest">
+{{!--
+AI Use Citation:
+Date: 08/12/2026
+Scope: ChatGPT helped connect this existing UPDATE form to the Express route and
+standardize the field names used by the SpecimenTests update stored procedure.
+Originality: Reviewed and adapted to the group's existing Handlebars page.
+Source: https://chatgpt.com/
+--}}
+<form class="cuForm" id="update-specimenTest-form" method="POST" action="/specimenTests/update">
     <div>
-        <label for="update_specimenTest">SpecimenTest to Update: </label>
-        <select name="update_specimenTest" id="update_specimenTest" required>
+        <label for="update-specimenTestID">SpecimenTest to Update: </label>
+        <select name="specimenTestID" id="update-specimenTestID" required>
             <option value="" disabled selected>Select a SpecimenTest</option>
             {{#each specimenTests}}
             <option value="{{this.specimenTestID}}" required>
@@ -119,8 +131,8 @@ Source URL: https://canvas.oregonstate.edu/courses/2051721/pages/exploration-web
     </div>
 
     <div>
-        <label for="update_laboratory_test">Laboratory Test: </label>
-        <select name="update_laboratory_test" id="update_laboratory_test" required>
+        <label for="update-laboratoryTestID">Laboratory Test: </label>
+        <select name="laboratoryTestID" id="update-laboratoryTestID" required>
             <option value="" disabled selected>Select a Test</option>
             {{#each laboratoryTests}}
                 <option value="{{this.laboratoryTestID}}" required>
@@ -131,8 +143,8 @@ Source URL: https://canvas.oregonstate.edu/courses/2051721/pages/exploration-web
     </div>
 
     <div>
-        <label for="update_doctor">Doctor: </label>
-        <select name="update_doctor" id="update_doctor" required>
+        <label for="update-doctorID">Doctor: </label>
+        <select name="doctorID" id="update-doctorID" required>
             <option value="" disabled selected>Select a Doctor</option>
             {{#each doctors}}
                 <option value="{{this.doctorID}}" required>
@@ -143,10 +155,10 @@ Source URL: https://canvas.oregonstate.edu/courses/2051721/pages/exploration-web
     </div>
 
     <div>
-        <label for="update_status">Status: </label>
-        <select name="update_status" id="update_status" required>
+        <label for="update-testStatus">Status: </label>
+        <select name="testStatus" id="update-testStatus" required>
             <option value="" disabled selected>Select a Status</option>
-            <option value="Collected">Ordered</option>
+            <option value="Ordered">Ordered</option>
             <option value="In-Lab">In-Lab</option>
             <option value="Completed">Completed</option>
         </select>

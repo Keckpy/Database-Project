@@ -133,6 +133,7 @@ app.get('/specimenTests', async function (req, res) {
         res.render('specimenTests', { 
             specimenTests: specimenTests,
             deleteSuccess: req.query.deleted === 'success',
+            updateSuccess: req.query.updated === 'success',
             specimens: specimens,
             laboratoryTests: laboratoryTests,
             doctors: doctors,
@@ -181,6 +182,43 @@ app.post('/specimenTests/delete/:specimenTestID', async function (req, res) {
         console.error('Error deleting SpecimenTest:', error);
         res.status(500).send(
             'The SpecimenTest could not be deleted. Make sure database/PL.sql has been imported.'
+        );
+    }
+});
+
+// AI Use Citation
+// Date: 08/12/2026
+// Scope: ChatGPT helped draft the SpecimenTests UPDATE route that calls the
+// group's stored procedure and validates the selected IDs/status.
+// Originality: The route was reviewed and adapted to this project's existing
+// Express structure and SpecimenTests form fields.
+// Source: https://chatgpt.com/
+app.post('/specimenTests/update', async function (req, res) {
+    const specimenTestID = Number.parseInt(req.body.specimenTestID, 10);
+    const laboratoryTestID = Number.parseInt(req.body.laboratoryTestID, 10);
+    const doctorID = Number.parseInt(req.body.doctorID, 10);
+    const testStatus = req.body.testStatus;
+    const allowedStatuses = ['Ordered', 'In-Lab', 'Completed'];
+
+    if (!Number.isInteger(specimenTestID) || specimenTestID <= 0 ||
+        !Number.isInteger(laboratoryTestID) || laboratoryTestID <= 0 ||
+        !Number.isInteger(doctorID) || doctorID <= 0 ||
+        !allowedStatuses.includes(testStatus)) {
+        return res.status(400).send('Invalid SpecimenTest update data.');
+    }
+
+    try {
+        await db.query('CALL sp_update_specimen_test(?, ?, ?, ?)', [
+            specimenTestID,
+            laboratoryTestID,
+            doctorID,
+            testStatus
+        ]);
+        res.redirect('/specimenTests?updated=success');
+    } catch (error) {
+        console.error('Error updating SpecimenTest:', error);
+        res.status(500).send(
+            'The SpecimenTest could not be updated. Make sure database/PL.sql has been imported.'
         );
     }
 });

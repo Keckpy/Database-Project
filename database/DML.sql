@@ -51,6 +51,8 @@ INSERT INTO SpecimenTests (specimenID, laboratoryTestID, doctorID, testStatus)
 VALUES (@specimenIDInput, @laboratoryTestIDInput, @doctorIDInput, @testStatusInput);
 
 -- Update an existing SpecimenTest
+-- Implemented by sp_update_specimen_test in PL.sql. Updating laboratoryTestID
+-- changes an FK in the Specimens-LaboratoryTests M:N relationship.
 UPDATE SpecimenTests
 SET laboratoryTestID = @laboratoryTestIDInput, doctorID = @doctorIDInput,
 testStatus = @testStatusInput

@@ -12,6 +12,7 @@
 -- Source: https://chatgpt.com/
 
 DROP PROCEDURE IF EXISTS sp_delete_specimen_test;
+DROP PROCEDURE IF EXISTS sp_update_specimen_test;
 DROP PROCEDURE IF EXISTS sp_add_specimen;
 DROP PROCEDURE IF EXISTS sp_add_specimen_test;
 
@@ -27,6 +28,28 @@ CREATE PROCEDURE sp_delete_specimen_test(
 )
 BEGIN
     DELETE FROM SpecimenTests
+    WHERE specimenTestID = p_specimenTestID;
+END //
+
+-- AI Use Citation
+-- Date: 08/12/2026
+-- Scope: ChatGPT helped draft this UPDATE stored procedure for SpecimenTests.
+-- Prompt synopsis: Add a stored procedure that updates the LaboratoryTests FK,
+-- Doctor FK, and status for a selected SpecimenTests record so the UI can
+-- demonstrate an UPDATE of the M:N relationship.
+-- Originality: The procedure was reviewed and adapted to the group's schema.
+-- Source: https://chatgpt.com/
+CREATE PROCEDURE sp_update_specimen_test(
+    IN p_specimenTestID INT,
+    IN p_laboratoryTestID INT,
+    IN p_doctorID INT,
+    IN p_status VARCHAR(25)
+)
+BEGIN
+    UPDATE SpecimenTests
+    SET laboratoryTestID = p_laboratoryTestID,
+        doctorID = p_doctorID,
+        testStatus = p_status
     WHERE specimenTestID = p_specimenTestID;
 END //
 
