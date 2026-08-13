@@ -22,6 +22,8 @@ DROP PROCEDURE IF EXISTS sp_add_laboratory_test;
 DROP PROCEDURE IF EXISTS sp_add_doctor;
 DROP PROCEDURE IF EXISTS sp_add_patient;
 
+DROP PROCEDURE IF EXISTS sp_update_laboratory_test;
+
 DELIMITER //
 
 CREATE PROCEDURE sp_reset_database()
@@ -319,4 +321,17 @@ BEGIN
     SELECT LAST_INSERT_ID() INTO p_id;
     SELECT p_id AS new_id;
 END //
+
+CREATE PROCEDURE sp_update_laboratory_test(
+    IN p_laboratoryTestID INT,
+    IN p_testName VARCHAR(100),
+    IN p_department VARCHAR(75)
+)
+BEGIN
+    UPDATE LaboratoryTests
+    SET testName = p_testName,
+        department = p_department
+    WHERE laboratoryTestID = p_laboratoryTestID;
+END //
+
 DELIMITER ;

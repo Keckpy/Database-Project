@@ -387,6 +387,33 @@ app.post('/patients/add', async function (req, res) {
 // ########################################
 // ########## LISTENER
 
+
+app.post('/laboratoryTests/update', async function (req, res) {
+    try {
+        let data = req.body;
+
+        const query = `CALL sp_update_laboratory_test(?, ?, ?);`;
+
+        await db.query(query, [
+            data.laboratoryTestID,
+            data.testName,
+            data.department
+        ]);
+
+        console.log(
+            `UPDATE LaboratoryTests. ID: ${data.laboratoryTestID} ` +
+            `Test: ${data.testName} Department: ${data.department}`
+        );
+
+        res.redirect('/laboratoryTests');
+    } catch (error) {
+        console.error('Error executing queries', error);
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
 app.listen(PORT, function () {
     console.log(
         'Express started on http://localhost:' +
